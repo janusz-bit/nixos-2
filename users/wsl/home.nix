@@ -22,5 +22,5 @@
 
   };
   home-manager.backupFileExtension = "backup";
-  home-manager.users.nixos.home.stateVersion = "26.05";
+  home-manager.users.nixos.home.stateVersion = "25.05";
 }
