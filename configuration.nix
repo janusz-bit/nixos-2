@@ -15,6 +15,7 @@
 {
   imports = [
     # include NixOS-WSL modules
+
   ];
   nixpkgs.config.allowUnfree = true;
 
@@ -24,26 +25,25 @@
     zed-editor-fhs
     nil
     nixd
-    gh
   ];
 
-  programs.git = {
-    enable = true;
-    config = {
-      user.name = "janusz-bit";
-      user.email = "janusz-bit@proton.me";
-      init.defaultBranch = "main";
-      url = {
-        "https://github.com/" = {
-          insteadOf = [
-            "gh:"
-            "github:"
-          ];
-        };
-      };
-    };
-
-  };
+  # programs.git = {
+  #   enable = true;
+  #   config = {
+  #     user.name = "janusz-bit";
+  #     user.email = "janusz-bit@proton.me";
+  #     init.defaultBranch = "main";
+  #     url = {
+  #       "https://github.com/" = {
+  #         insteadOf = [
+  #           "gh:"
+  #           "github:"
+  #         ];
+  #       };
+  #     };
+  #   };
+  #
+  # };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
