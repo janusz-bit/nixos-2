@@ -24,6 +24,7 @@
     zed-editor-fhs
     nil
     nixd
+    gh
   ];
 
   programs.git = {
