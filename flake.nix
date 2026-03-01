@@ -25,7 +25,7 @@
             ./configuration.nix
             ./wsl.nix
             home-manager.nixosModules.default
-            ./users/wsl/home.nix
+            ./hosts/wsl/home.nix
           ];
         };
       };
