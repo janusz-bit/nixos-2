@@ -20,9 +20,11 @@
         ...
       }:
       {
+        # debug = true;
         imports = [
           # Optional: use external flake logic, e.g.
           # inputs.foo.flakeModules.default
+          inputs.home-manager.flakeModules.home-manager
         ];
         flake = {
           # Put your original flake attributes here.
@@ -34,9 +36,35 @@
                 ./configuration.nix
                 ./wsl.nix
                 inputs.home-manager.nixosModules.default
-                ./users/wsl/home.nix
+                ./hosts/wsl/home.nix
               ];
             };
+          };
+
+          homeModules.nixos =
+            { ... }:
+            {
+              home.username = "nixos";
+              home.homeDirectory = "/home/nixos";
+              home.stateVersion = "25.05";
+              programs = {
+                gh.enable = true;
+                git = {
+                  enable = true;
+                  settings = {
+                    user.name = "janusz-bit";
+                    user.email = "janusz-bit@proton.me";
+                    init.defaultBranch = "main";
+                  };
+                };
+              };
+            };
+          homeConfigurations.nixos = inputs.home-manager.lib.homeManagerConfiguration {
+            pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+            modules = [
+              inputs.self.homeModules.nixos
+            ];
+
           };
         };
         systems = [
@@ -47,6 +75,7 @@
         perSystem =
           { config, pkgs, ... }:
           {
+
             # Recommended: move all package definitions here.
             # e.g. (assuming you have a nixpkgs input)
             # packages.foo = pkgs.callPackage ./foo/package.nix { };
